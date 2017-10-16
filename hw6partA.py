@@ -15,7 +15,7 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
-url = input('Enter - ')
+url = "http://py4e-data.dr-chuck.net/comments_36689.html"
 html = urlopen(url, context=ctx).read()
 
 # html.parser is the HTML parser included in the standard Python 3 library.
@@ -24,10 +24,9 @@ html = urlopen(url, context=ctx).read()
 soup = BeautifulSoup(html, "html.parser")
 
 # Retrieve all of the anchor tags
-tags = soup('a')
+total_sum=0
+tags= soup('span')
 for tag in tags:
-    # Look at the parts of a tag
-    print('TAG:', tag)
-    print('URL:', tag.get('href', None))
-    print('Contents:', tag.contents[0])
-    print('Attrs:', tag.attrs)
+    total_sum += int(tag.contents[0])
+
+print (total_sum)
